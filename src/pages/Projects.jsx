@@ -4,12 +4,17 @@ import PageWrapper from '../components/PageWrapper.jsx'
 import AnimatedBg from '../components/AnimatedBg.jsx'
 
 const projects = [
-  { id: 1, title: 'Lost & Found Mobile App', category: 'Mobile', label: 'BSCS Final Year Project',
+  { id: 1, title: 'Maison — E-Commerce Platform', category: 'Web', label: 'Full-Stack Project',
+    desc: 'A full-stack e-commerce platform with a complete shopping experience — product catalog, persistent cart, and checkout — plus a secure admin panel for managing inventory and product imagery. Built with a React frontend, an Express REST API, and a PostgreSQL database, deployed across Vercel and Railway.',
+    stack: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'JWT', 'Cloudinary'],
+    features: ['Product management & catalog', 'Shopping cart with persistence', 'Full checkout flow', 'JWT auth with protected routes', 'Admin dashboard', 'Cloudinary image uploads & CDN'],
+  },
+  { id: 2, title: 'Lost & Found Mobile App', category: 'Mobile', label: 'BSCS Final Year Project',
     desc: 'A real-time lost & found platform for campus use with role-based authentication for Students, Faculty, and Staff. Features live chat, push notifications, image uploads, and an admin panel with full moderation and analytics.',
     stack: ['Flutter', 'Dart', 'Firebase', 'Firestore', 'Firebase Auth', 'Cloud Messaging'],
     features: ['Role-based auth (Student / Faculty / Staff)', 'Real-time posts with search & filter', 'Image upload support', 'Live chat system', 'Push notifications', 'Admin moderation & analytics panel'],
   },
-  { id: 2, title: 'Delicia Cafe Web System', category: 'Web', label: 'ADP Final Year Project',
+  { id: 3, title: 'Delicia Cafe Web System', category: 'Web', label: 'ADP Final Year Project',
     desc: 'A complete web-based cafe ordering system with cart and order management, user authentication, Google Maps API integration, and a modern animated UI with fully responsive design.',
     stack: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'Google Maps API'],
     features: ['Cart & order management', 'User authentication system', 'Google Maps API integration', 'Modern UI with animations', 'Fully responsive design'],

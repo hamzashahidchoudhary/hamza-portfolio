@@ -19,8 +19,10 @@ const groups = [
     label: 'Frameworks & Tools',
     color: '#7c3aed',
     items: [
+      { name: 'React.js', level: 82 },
+      { name: 'Node.js & Express', level: 78 },
+      { name: 'PostgreSQL & Prisma', level: 76 },
       { name: 'Flutter', level: 82 },
-      { name: 'React.js', level: 80 },
       { name: 'Firebase', level: 85 },
       { name: 'REST APIs', level: 80 },
       { name: 'Git & GitHub', level: 82 },
@@ -31,12 +33,12 @@ const groups = [
     label: 'Core Skills',
     color: '#16a34a',
     items: [
-      { name: 'UI/UX Design', level: 78 },
-      { name: 'Full Stack Development', level: 80 },
+      { name: 'Full Stack Development', level: 82 },
+      { name: 'Authentication & Security', level: 78 },
+      { name: 'API Design & Integration', level: 80 },
       { name: 'Mobile App Development', level: 82 },
       { name: 'Problem Solving', level: 85 },
       { name: 'Team Collaboration', level: 90 },
-      { name: 'Communication', level: 88 },
     ],
   },
 ]
@@ -105,8 +107,10 @@ export default function Skills() {
             <h2 className="display" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', marginBottom: '2rem' }}>Full Toolkit</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
               {['HTML5', 'CSS3', 'JavaScript', 'Dart', 'PHP', 'C++', 'SQL', 'NoSQL',
-                'Flutter', 'React.js', 'Firebase', 'Firestore', 'REST APIs', 'Git',
-                'GitHub', 'Google Maps API', 'DBMS', 'UI/UX Design', 'Responsive Design'
+                'React.js', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'JWT',
+                'Flutter', 'Firebase', 'Firestore', 'REST APIs', 'Cloudinary',
+                'Vercel', 'Railway', 'Git', 'GitHub', 'Google Maps API', 'DBMS',
+                'UI/UX Design', 'Responsive Design'
               ].map((t, i) => (
                 <motion.span
                   key={t}

@@ -9,9 +9,15 @@ const fadeUp = {
   animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 }
 
-const techStack = ['Flutter', 'React.js', 'Firebase', 'JavaScript', 'PHP', 'SQL', 'Node.js', 'Git']
+const techStack = ['React.js', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Flutter', 'Firebase', 'JavaScript', 'Git']
 
 const projects = [
+  {
+    title: 'Maison — E-Commerce Platform',
+    category: 'Web · Full-Stack Project',
+    desc: 'Full-stack e-commerce platform with product management, shopping cart, checkout, and an admin panel. Secured with JWT auth, backed by PostgreSQL + Prisma, with Cloudinary image delivery — deployed on Vercel & Railway.',
+    stack: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Prisma'],
+  },
   {
     title: 'Lost & Found App',
     category: 'Mobile · BSCS Final Year Project',
@@ -69,7 +75,7 @@ export default function Home() {
             viewport={{ once: true }}
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1px', background: 'var(--border)', borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border)' }}
           >
-            {[['2+', 'Months Exp.'], ['2', 'Projects'], ['2', 'Degrees'], ['5+', 'Technologies']].map(([n, l]) => (
+            {[['2+', 'Months Exp.'], ['3', 'Projects'], ['2', 'Degrees'], ['10+', 'Technologies']].map(([n, l]) => (
               <div key={l} style={{ padding: '1.75rem 1.25rem', background: 'var(--bg2)', textAlign: 'center' }}>
                 <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', color: 'var(--accent)', lineHeight: 1, marginBottom: '0.35rem' }}>{n}</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--muted)', letterSpacing: '0.08em' }}>{l.toUpperCase()}</div>
