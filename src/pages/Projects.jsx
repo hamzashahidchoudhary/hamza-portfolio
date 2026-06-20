@@ -19,6 +19,11 @@ const projects = [
     stack: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'Google Maps API'],
     features: ['Cart & order management', 'User authentication system', 'Google Maps API integration', 'Modern UI with animations', 'Fully responsive design'],
   },
+  { id: 4, title: 'Wayfare — Property Booking Platform', category: 'Web', label: 'Full-Stack Project',
+    desc: 'A full-stack Airbnb-style booking platform supporting three user roles — guests, hosts, and admins — with real Stripe Checkout payments, geospatial map search powered by MongoDB, and host/admin analytics dashboards. Includes a booking-conflict resolution system, policy-based cancellation refunds, and Cloudinary-backed image uploads.',
+    stack: ['React', 'Redux Toolkit', 'Node.js', 'Express', 'MongoDB', 'Stripe', 'Cloudinary', 'Leaflet'],
+    features: ['Three-role auth (Guest / Host / Admin)', 'Geospatial search with interactive map', 'Real Stripe Checkout + webhook confirmation', 'Booking conflict & refund logic', 'Host listing management with photo uploads', 'Admin analytics dashboard'],
+  },
 ]
 
 const cats = ['All', 'Mobile', 'Web']

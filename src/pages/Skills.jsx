@@ -22,6 +22,8 @@ const groups = [
       { name: 'React.js', level: 82 },
       { name: 'Node.js & Express', level: 78 },
       { name: 'PostgreSQL & Prisma', level: 76 },
+      { name: 'MongoDB & Mongoose', level: 76 },
+      { name: 'Redux Toolkit', level: 75 },
       { name: 'Flutter', level: 82 },
       { name: 'Firebase', level: 85 },
       { name: 'REST APIs', level: 80 },
@@ -36,7 +38,9 @@ const groups = [
       { name: 'Full Stack Development', level: 82 },
       { name: 'Authentication & Security', level: 78 },
       { name: 'API Design & Integration', level: 80 },
+      { name: 'Payment Gateway Integration', level: 74 },
       { name: 'Mobile App Development', level: 82 },
+      { name: 'Cloud Deployment', level: 72 },
       { name: 'Problem Solving', level: 85 },
       { name: 'Team Collaboration', level: 90 },
     ],
@@ -107,9 +111,10 @@ export default function Skills() {
             <h2 className="display" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', marginBottom: '2rem' }}>Full Toolkit</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
               {['HTML5', 'CSS3', 'JavaScript', 'Dart', 'PHP', 'C++', 'SQL', 'NoSQL',
-                'React.js', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'JWT',
-                'Flutter', 'Firebase', 'Firestore', 'REST APIs', 'Cloudinary',
-                'Vercel', 'Railway', 'Git', 'GitHub', 'Google Maps API', 'DBMS',
+                'React.js', 'Redux Toolkit', 'Node.js', 'Express', 'PostgreSQL', 'Prisma',
+                'MongoDB', 'Mongoose', 'JWT', 'Stripe', 'Flutter', 'Firebase', 'Firestore',
+                'REST APIs', 'Cloudinary', 'Vercel', 'Railway', 'Git', 'GitHub',
+                'Google Maps API', 'Leaflet / Map APIs', 'DBMS',
                 'UI/UX Design', 'Responsive Design'
               ].map((t, i) => (
                 <motion.span
