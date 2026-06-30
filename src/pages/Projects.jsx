@@ -24,6 +24,11 @@ const projects = [
     stack: ['React', 'Redux Toolkit', 'Node.js', 'Express', 'MongoDB', 'Stripe', 'Cloudinary', 'Leaflet'],
     features: ['Three-role auth (Guest / Host / Admin)', 'Geospatial search with interactive map', 'Real Stripe Checkout + webhook confirmation', 'Booking conflict & refund logic', 'Host listing management with photo uploads', 'Admin analytics dashboard'],
   },
+  { id: 5, title: 'Whispr — Real-Time Chat Application', category: 'Web', label: 'Full-Stack Project',
+    desc: 'A production-ready real-time chat application built with Laravel 12 and React 19. Features private messaging, group chats, emoji reactions, message editing and deletion, reply threading, file & image sharing, browser push notifications, and a polished mobile-responsive dark UI. Deployed live on Railway with MySQL and Redis.',
+    stack: ['Laravel 12', 'PHP 8.3', 'React 19', 'Vite', 'MySQL', 'Redis', 'Laravel Reverb', 'Tailwind CSS', 'Railway'],
+    features: ['Real-time messaging with WebSockets (Laravel Reverb)', 'Private & group conversations', 'Emoji reactions with long-press on mobile', 'Edit & delete messages', 'Reply threading', 'File & image attachments', 'Browser push notifications + sound', 'Mobile-responsive dark UI', 'Deployed on Railway'],
+  },
 ]
 
 const cats = ['All', 'Mobile', 'Web']

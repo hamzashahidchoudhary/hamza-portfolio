@@ -36,6 +36,12 @@ const projects = [
     desc: 'Full-featured cafe ordering system with cart management, Google Maps integration, and animated responsive UI.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Firebase'],
   },
+  {
+    title: 'Whispr — Real-Time Chat Application',
+    category: 'Web · Full-Stack Project',
+    desc: 'Production-ready real-time chat application with private messaging, emoji reactions, message editing and deletion, reply threading, file sharing, and browser notifications. Features a polished dark UI, mobile-responsive design, and is live-deployed on Railway.',
+    stack: ['Laravel 12', 'React 19', 'MySQL', 'Redis', 'Reverb', 'Tailwind CSS'],
+  },
 ]
 
 export default function Home() {
@@ -81,7 +87,7 @@ export default function Home() {
             viewport={{ once: true }}
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1px', background: 'var(--border)', borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border)' }}
           >
-            {[['2+', 'Months Exp.'], ['4', 'Projects'], ['2', 'Degrees'], ['10+', 'Technologies']].map(([n, l]) => (
+            {[['2+', 'Months Exp.'], ['5', 'Projects'], ['2', 'Degrees'], ['10+', 'Technologies']].map(([n, l]) => (
               <div key={l} style={{ padding: '1.75rem 1.25rem', background: 'var(--bg2)', textAlign: 'center' }}>
                 <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', color: 'var(--accent)', lineHeight: 1, marginBottom: '0.35rem' }}>{n}</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--muted)', letterSpacing: '0.08em' }}>{l.toUpperCase()}</div>
