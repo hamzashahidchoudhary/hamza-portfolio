@@ -6,30 +6,33 @@ import AnimatedBg from '../components/AnimatedBg.jsx'
 const projects = [
   { id: 1, title: 'Whispr — Real-Time Chat Application', category: 'Web', label: 'Full-Stack Project', status: 'in-progress',
     link: 'https://whispr-live.up.railway.app/',
+    github: 'https://github.com/hamzashahidchoudhary/Whispr',
     desc: 'A production-ready real-time chat application built with Laravel 12 and React 19. Features private messaging, group chats, emoji reactions, message editing and deletion, reply threading, file & image sharing, browser push notifications, and a polished mobile-responsive dark UI. Deployed live on Railway with MySQL and Redis.',
     stack: ['Laravel 12', 'PHP 8.3', 'React 19', 'Vite', 'MySQL', 'Redis', 'Laravel Reverb', 'Tailwind CSS', 'Railway'],
     features: ['Real-time messaging with WebSockets (Laravel Reverb)', 'Private & group conversations', 'Emoji reactions with long-press on mobile', 'Edit & delete messages', 'Reply threading', 'File & image attachments', 'Browser push notifications + sound', 'Mobile-responsive dark UI'],
   },
   { id: 2, title: 'Wayfare — Property Booking Platform', category: 'Web', label: 'Full-Stack Project', status: 'in-progress',
     link: 'https://wayfare-booking.vercel.app/',
+    github: 'https://github.com/hamzashahidchoudhary/hotel-booking-platform',
     desc: 'A full-stack Airbnb-style booking platform supporting three user roles — guests, hosts, and admins — with real Stripe Checkout payments, geospatial map search powered by MongoDB, and host/admin analytics dashboards. Includes a booking-conflict resolution system, policy-based cancellation refunds, and Cloudinary-backed image uploads.',
     stack: ['React', 'Redux Toolkit', 'Node.js', 'Express', 'MongoDB', 'Stripe', 'Cloudinary', 'Leaflet'],
     features: ['Three-role auth (Guest / Host / Admin)', 'Geospatial search with interactive map', 'Real Stripe Checkout + webhook confirmation', 'Booking conflict & refund logic', 'Host listing management with photo uploads', 'Admin analytics dashboard'],
   },
   { id: 3, title: 'Maison — E-Commerce Platform', category: 'Web', label: 'Full-Stack Project', status: 'in-progress',
     link: 'https://maison-store-phi.vercel.app/',
+    github: 'https://github.com/hamzashahidchoudhary/maison-store',
     desc: 'A full-stack e-commerce platform with a complete shopping experience — product catalog, persistent cart, and checkout — plus a secure admin panel for managing inventory and product imagery. Built with a React frontend, an Express REST API, and a PostgreSQL database, deployed across Vercel and Railway.',
     stack: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'JWT', 'Cloudinary'],
     features: ['Product management & catalog', 'Shopping cart with persistence', 'Full checkout flow', 'JWT auth with protected routes', 'Admin dashboard', 'Cloudinary image uploads & CDN'],
   },
   { id: 4, title: 'Lost & Found Mobile App', category: 'Mobile', label: 'BSCS Final Year Project', status: 'done',
-    link: null,
+    link: null, github: null,
     desc: 'A real-time lost & found platform for campus use with role-based authentication for Students, Faculty, and Staff. Features live chat, push notifications, image uploads, and an admin panel with full moderation and analytics.',
     stack: ['Flutter', 'Dart', 'Firebase', 'Firestore', 'Firebase Auth', 'Cloud Messaging'],
     features: ['Role-based auth (Student / Faculty / Staff)', 'Real-time posts with search & filter', 'Image upload support', 'Live chat system', 'Push notifications', 'Admin moderation & analytics panel'],
   },
   { id: 5, title: 'Delicia Cafe Web System', category: 'Web', label: 'ADP Final Year Project', status: 'done',
-    link: null,
+    link: null, github: null,
     desc: 'A complete web-based cafe ordering system with cart and order management, user authentication, Google Maps API integration, and a modern animated UI with fully responsive design.',
     stack: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'Google Maps API'],
     features: ['Cart & order management', 'User authentication system', 'Google Maps API integration', 'Modern UI with animations', 'Fully responsive design'],
@@ -101,23 +104,40 @@ export default function Projects() {
                       <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.3rem, 3vw, 1.75rem)', color: 'var(--ink)', marginBottom: '0.75rem', lineHeight: 1.2 }}>{p.title}</h2>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1rem' }}>
                         {p.stack.map(s => <span key={s} className="tag">{s}</span>)}
-                        </div>
-                        <p style={{ color: 'var(--muted)', fontSize: '0.9rem', fontWeight: 300, lineHeight: 1.75, marginBottom: '1.5rem' }}>{p.desc}</p>
+                      </div>
+                      <p style={{ color: 'var(--muted)', fontSize: '0.9rem', fontWeight: 300, lineHeight: 1.75, marginBottom: '1.5rem' }}>{p.desc}</p>
+                      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                         {p.link && (
-                        <a href={p.link} target="_blank" rel="noreferrer" style={{
-                          display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                          fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
-                          color: 'var(--accent)', letterSpacing: '0.06em',
-                          border: '1px solid rgba(37,99,235,0.25)',
-                          padding: '0.45rem 1rem', borderRadius: 7,
-                          background: 'var(--accent-lt)', transition: 'all 0.2s',
-                        }}
-                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(37,99,235,0.15)'}
-                          onMouseLeave={e => e.currentTarget.style.background = 'var(--accent-lt)'}
-                        >
-                          Live Demo ↗
-                        </a>
-                      )}
+                          <a href={p.link} target="_blank" rel="noreferrer" style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                            fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
+                            color: 'var(--accent)', letterSpacing: '0.06em',
+                            border: '1px solid rgba(37,99,235,0.25)',
+                            padding: '0.45rem 1rem', borderRadius: 7,
+                            background: 'var(--accent-lt)', transition: 'all 0.2s',
+                          }}
+                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(37,99,235,0.15)'}
+                            onMouseLeave={e => e.currentTarget.style.background = 'var(--accent-lt)'}
+                          >
+                            Live Demo ↗
+                          </a>
+                        )}
+                        {p.github && (
+                          <a href={p.github} target="_blank" rel="noreferrer" style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                            fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
+                            color: 'var(--muted)', letterSpacing: '0.06em',
+                            border: '1px solid var(--border)',
+                            padding: '0.45rem 1rem', borderRadius: 7,
+                            background: 'transparent', transition: 'all 0.2s',
+                          }}
+                            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)' }}
+                            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--muted)' }}
+                          >
+                            GitHub ↗
+                          </a>
+                        )}
+                      </div>
                     </div>
                     <div style={{ background: 'var(--bg3)', borderRadius: 'var(--radius)', padding: '1.5rem', border: '1px solid var(--border)' }}>
                       <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--accent)', letterSpacing: '0.12em', marginBottom: '1rem' }}>KEY FEATURES</p>
