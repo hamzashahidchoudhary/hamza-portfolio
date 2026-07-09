@@ -98,12 +98,12 @@ export default function Projects() {
                           </span>
                         )}
                       </div>
-                      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.3rem, 3vw, 1.75rem)', color: 'var(--ink)', marginBottom: '1rem', lineHeight: 1.2 }}>{p.title}</h2>
-                      <p style={{ color: 'var(--muted)', fontSize: '0.9rem', fontWeight: 300, lineHeight: 1.75, marginBottom: '1.5rem' }}>{p.desc}</p>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.25rem' }}>
-                        {p.stack.map(s => <span key={s} className="tag blue">{s}</span>)}
-                      </div>
-                      {p.link && (
+                      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.3rem, 3vw, 1.75rem)', color: 'var(--ink)', marginBottom: '0.75rem', lineHeight: 1.2 }}>{p.title}</h2>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1rem' }}>
+                        {p.stack.map(s => <span key={s} className="tag">{s}</span>)}
+                        </div>
+                        <p style={{ color: 'var(--muted)', fontSize: '0.9rem', fontWeight: 300, lineHeight: 1.75, marginBottom: '1.5rem' }}>{p.desc}</p>
+                        {p.link && (
                         <a href={p.link} target="_blank" rel="noreferrer" style={{
                           display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                           fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
