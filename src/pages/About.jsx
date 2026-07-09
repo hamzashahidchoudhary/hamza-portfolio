@@ -3,8 +3,24 @@ import PageWrapper from '../components/PageWrapper.jsx'
 import AnimatedBg from '../components/AnimatedBg.jsx'
 
 const timeline = [
-  { year: 'Jun–Aug 2024', role: 'Full Stack Web Developer Intern', place: 'Hello Future Technologies (Pvt) Ltd, Lahore', type: 'work',
-    points: ['Developed responsive web interfaces using HTML, CSS, and JavaScript', 'Integrated backend APIs and database systems', 'Optimised application performance and resolved bugs', 'Collaborated with team on real-world projects'] },
+  { year: 'Jan 2026 – Jul 2026', role: 'Associate Full Stack Developer', place: 'Hello Future Technologies (Pvt) Ltd, Lahore', type: 'work',
+    points: [
+      'Collaborated with the Senior Web Developer to build and maintain full-stack web applications',
+      'Developed responsive user interfaces using React.js, HTML5, CSS3, and JavaScript',
+      'Built and integrated RESTful APIs using Node.js and Express.js',
+      'Worked with MongoDB and PostgreSQL for database design, CRUD operations, query optimization, and data management',
+      'Implemented secure authentication and authorization using JWT',
+      'Debugged applications, fixed bugs, and optimized frontend, backend, and database performance',
+      'Used Git and GitHub for version control, collaboration, and code reviews',
+      'Participated in Agile development, sprint planning, testing, deployment, and production support',
+    ] },
+  { year: 'Jun 2024 – Aug 2024', role: 'Full Stack Web Developer Intern', place: 'Hello Future Technologies (Pvt) Ltd, Lahore', type: 'work',
+    points: [
+      'Developed responsive web interfaces using HTML, CSS, and JavaScript',
+      'Integrated backend APIs and database systems',
+      'Optimised application performance and resolved bugs',
+      'Collaborated with team on real-world projects',
+    ] },
   { year: '2024 – 2026', role: 'BS Computer Science', place: 'NCBA&E — Alhamra University, Rahim Yar Khan', type: 'edu',
     points: ['Completed degree in Computer Science', 'Focus: Full Stack Development, Mobile Apps, Databases'] },
   { year: '2022 – 2024', role: 'ADP Computer Science', place: 'NCBA&E — Alhamra University, Rahim Yar Khan', type: 'edu',
@@ -37,7 +53,6 @@ export default function About() {
             </h1>
           </motion.div>
 
-          {/* Two-col → one-col on mobile */}
           <div className="about-grid" style={{ marginTop: '3rem' }}>
             <style>{`
               .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
@@ -76,15 +91,15 @@ export default function About() {
             {/* Right */}
             <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.25 }}>
               <p style={{ fontSize: '1.05rem', color: 'var(--ink2)', fontWeight: 300, lineHeight: 1.8, marginBottom: '1.25rem' }}>
-                I'm a <strong style={{ fontWeight: 600, color: 'var(--ink)' }}>Full Stack Developer</strong> with experience in web and mobile app development. I love turning complex problems into clean, performant solutions.
+                I'm a <strong style={{ fontWeight: 600, color: 'var(--ink)' }}>Full Stack Developer</strong> with hands-on professional experience in web and mobile app development. I love turning complex problems into clean, performant solutions.
               </p>
               <p style={{ fontSize: '0.95rem', color: 'var(--muted)', fontWeight: 300, lineHeight: 1.8, marginBottom: '2rem' }}>
-                I completed my internship at Hello Future Technologies in Lahore, building real-world web interfaces and integrating backend APIs. I'm pursuing my BS in CS and actively looking for full-stack developer opportunities.
+                I currently work as an Associate Full Stack Developer at Hello Future Technologies in Lahore, building full-stack web applications with React.js, Node.js, PostgreSQL, and MongoDB. I'm also pursuing my BS in CS and open to new full-stack developer opportunities.
               </p>
               <div style={{ padding: '1.25rem 1.5rem', borderRadius: 'var(--radius)', background: 'var(--accent-lt)', border: '1px solid rgba(37,99,235,0.15)', marginBottom: '2rem' }}>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--accent)', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>CAREER OBJECTIVE</p>
                 <p style={{ fontSize: '0.9rem', color: 'var(--ink2)', fontWeight: 300, lineHeight: 1.7 }}>
-                  To secure a Full Stack Developer role where I can apply my skills, contribute to real-world systems, and grow as a professional software engineer.
+                  To grow as a Full Stack Developer by contributing to impactful real-world systems, applying my skills across the entire web stack, and continuously learning in a collaborative environment.
                 </p>
               </div>
               <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--muted)', letterSpacing: '0.12em', marginBottom: '1rem' }}>INTERESTS & HOBBIES</p>
