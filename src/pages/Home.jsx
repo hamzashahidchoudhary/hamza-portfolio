@@ -87,7 +87,7 @@ export default function Home() {
             viewport={{ once: true }}
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1px', background: 'var(--border)', borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border)' }}
           >
-            {[['2+', 'Months Exp.'], ['5', 'Projects'], ['2', 'Degrees'], ['10+', 'Technologies']].map(([n, l]) => (
+            {[['8+', 'Months Exp.'], ['5', 'Projects'], ['2', 'Degrees'], ['20+', 'Technologies']].map(([n, l]) => (
               <div key={l} style={{ padding: '1.75rem 1.25rem', background: 'var(--bg2)', textAlign: 'center' }}>
                 <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', color: 'var(--accent)', lineHeight: 1, marginBottom: '0.35rem' }}>{n}</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--muted)', letterSpacing: '0.08em' }}>{l.toUpperCase()}</div>
