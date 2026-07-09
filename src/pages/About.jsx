@@ -3,7 +3,7 @@ import PageWrapper from '../components/PageWrapper.jsx'
 import AnimatedBg from '../components/AnimatedBg.jsx'
 
 const timeline = [
-  { year: 'Jan 2026 – Jul 2026', role: 'Associate Full Stack Developer', place: 'Hello Future Technologies (Pvt) Ltd, Lahore', type: 'work',
+  { year: 'Jan 2026 – Jul 2026', role: 'Junior Full Stack Developer', place: 'Hello Future Technologies (Pvt) Ltd, Lahore', type: 'work',
     points: [
       'Collaborated with the Senior Web Developer to build and maintain full-stack web applications',
       'Developed responsive user interfaces using React.js, HTML5, CSS3, and JavaScript',
@@ -94,7 +94,7 @@ export default function About() {
                 I'm a <strong style={{ fontWeight: 600, color: 'var(--ink)' }}>Full Stack Developer</strong> with hands-on professional experience in web and mobile app development. I love turning complex problems into clean, performant solutions.
               </p>
               <p style={{ fontSize: '0.95rem', color: 'var(--muted)', fontWeight: 300, lineHeight: 1.8, marginBottom: '2rem' }}>
-                I currently work as an Associate Full Stack Developer at Hello Future Technologies in Lahore, building full-stack web applications with React.js, Node.js, PostgreSQL, and MongoDB. I'm also pursuing my BS in CS and open to new full-stack developer opportunities.
+                I currently work as an Junior Full Stack Developer at Hello Future Technologies in Lahore, building full-stack web applications with React.js, Node.js, PostgreSQL, and MongoDB. I'm also pursuing my BS in CS and open to new full-stack developer opportunities.
               </p>
               <div style={{ padding: '1.25rem 1.5rem', borderRadius: 'var(--radius)', background: 'var(--accent-lt)', border: '1px solid rgba(37,99,235,0.15)', marginBottom: '2rem' }}>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--accent)', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>CAREER OBJECTIVE</p>
