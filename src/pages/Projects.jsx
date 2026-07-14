@@ -4,6 +4,13 @@ import PageWrapper from '../components/PageWrapper.jsx'
 import AnimatedBg from '../components/AnimatedBg.jsx'
 
 const projects = [
+  { id: 6, title: 'Veliora — AI Chatbot with Tool-Calling', category: 'Web', label: 'Full-Stack Project', status: 'in-progress',
+    link: 'https://veliora-ai-chatbot.vercel.app/',
+    github: 'https://github.com/hamzashahidchoudhary/veliora-ai-chatbot',
+    desc: 'A full-stack AI chatbot built around LLM tool calling — the model can decide mid-conversation to call live APIs for real-time weather and web search, grounding its answers in current data instead of guessing. Built with a React frontend and an Express backend powered by the Groq API, with persistent conversation history in MongoDB and a fully responsive, dark-mode-capable UI.',
+    stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Groq API', 'Tavily API'],
+    features: ['LLM tool-calling loop with live weather (Open-Meteo)', 'Live web search grounding via Tavily API', 'Persistent conversation history per anonymous session', 'Markdown rendering with syntax-highlighted code', 'Light/dark mode with saved preference', 'Fully responsive UI with mobile sidebar drawer'],
+  },
   { id: 1, title: 'Whispr — Real-Time Chat Application', category: 'Web', label: 'Full-Stack Project', status: 'in-progress',
     link: 'https://whispr-live.up.railway.app/',
     github: 'https://github.com/hamzashahidchoudhary/Whispr',

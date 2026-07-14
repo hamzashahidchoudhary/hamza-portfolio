@@ -28,6 +28,7 @@ const groups = [
       { name: 'Flutter', level: 82 },
       { name: 'Firebase', level: 85 },
       { name: 'REST APIs', level: 80 },
+      { name: 'LLM Integration & Tool Calling', level: 74 },
       { name: 'WebSockets / Reverb', level: 70 },
       { name: 'Git & GitHub', level: 82 },
       { name: 'DBMS', level: 74 },
@@ -117,7 +118,7 @@ export default function Skills() {
                 'React.js', 'Redux Toolkit', 'Node.js', 'Express', 'Laravel', 'PostgreSQL', 'Prisma',
                 'MongoDB', 'Mongoose', 'MySQL', 'JWT', 'Stripe', 'Flutter', 'Firebase', 'Firestore',
                 'REST APIs', 'WebSockets', 'Laravel Reverb', 'Cloudinary', 'Vercel', 'Railway', 'Git', 'GitHub',
-                'Google Maps API', 'Leaflet / Map APIs', 'DBMS',
+                'Google Maps API', 'Leaflet / Map APIs', 'DBMS', 'Groq API', 'LLM Tool Calling', 'Tavily API',
                 'UI/UX Design', 'Responsive Design'
               ].map((t, i) => (
                 <motion.span

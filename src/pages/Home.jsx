@@ -13,6 +13,12 @@ const techStack = ['React.js', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Fl
 
 const projects = [
   {
+    title: 'Veliora — AI Chatbot with Tool-Calling',
+    category: 'Web · Full-Stack Project',
+    desc: 'Full-stack AI chatbot with LLM-powered tool calling — the model can call live weather and web search APIs mid-conversation to ground its answers in real, current data. Features persistent conversation history, Markdown/code rendering, and dark mode — deployed on Vercel & Render.',
+    stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Groq API', 'Tavily API'],
+  },
+  {
     title: 'Wayfare — Property Booking Platform',
     category: 'Web · Full-Stack Project',
     desc: 'Full-stack Airbnb-style booking platform with three user roles, geospatial map search, and real Stripe payment integration. Features host/admin dashboards, JWT auth, Cloudinary image uploads, and a booking-conflict resolution system — deployed on Vercel with a MongoDB Atlas backend.',
@@ -87,7 +93,7 @@ export default function Home() {
             viewport={{ once: true }}
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1px', background: 'var(--border)', borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border)' }}
           >
-            {[['8+', 'Months Exp.'], ['5', 'Projects'], ['2', 'Degrees'], ['20+', 'Technologies']].map(([n, l]) => (
+            {[['8+', 'Months Exp.'], ['6', 'Projects'], ['2', 'Degrees'], ['20+', 'Technologies']].map(([n, l]) => (
               <div key={l} style={{ padding: '1.75rem 1.25rem', background: 'var(--bg2)', textAlign: 'center' }}>
                 <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', color: 'var(--accent)', lineHeight: 1, marginBottom: '0.35rem' }}>{n}</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--muted)', letterSpacing: '0.08em' }}>{l.toUpperCase()}</div>
