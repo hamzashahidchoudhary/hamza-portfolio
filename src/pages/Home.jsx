@@ -8,6 +8,7 @@ import CountUp from '../components/CountUp.jsx'
 import TiltCard from '../components/TiltCard.jsx'
 import MagneticButton from '../components/MagneticButton.jsx'
 import RevealText from '../components/RevealText.jsx'
+import Hero3D from '../components/Hero3D.jsx'
 
 const techStack = ['React.js', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Flutter', 'Firebase', 'JavaScript', 'Git', 'MongoDB', 'Laravel', 'Redis']
 
@@ -136,8 +137,11 @@ export default function Home() {
                 <MagneticButton href="/projects" style={{ padding: '0.8rem 2rem', fontSize: '0.9rem', borderRadius: 10, background: 'var(--accent)', color: '#fff', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: 500, textDecoration: 'none' }}>
                   View Projects →
                 </MagneticButton>
-                <MagneticButton href="mailto:muhammad.hamza.dev@outlook.com" style={{ padding: '0.8rem 2rem', fontSize: '0.9rem', borderRadius: 10, background: 'transparent', color: 'var(--ink2)', border: '1px solid var(--border)', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: 500, textDecoration: 'none' }}>
+                <MagneticButton href="mailto:muhammad.hamza.dev@outlook.com" className="btn btn-outline" style={{ padding: '0.8rem 2rem', fontSize: '0.9rem', borderRadius: 10, background: 'transparent', color: 'var(--ink2)', border: '1px solid var(--border)', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: 500 }}>
                   Get in Touch
+                </MagneticButton>
+                <MagneticButton href="/resume.pdf" target="_blank" rel="noreferrer" style={{ padding: '0.8rem 1.5rem', fontSize: '0.9rem', borderRadius: 10, background: 'transparent', color: 'var(--accent)', border: '1px dashed rgba(37,99,235,0.4)', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: 500 }}>
+                  ↓ Resume
                 </MagneticButton>
               </motion.div>
 
@@ -159,33 +163,16 @@ export default function Home() {
               </motion.div>
             </div>
 
+            {/* 3D Hero */}
             <motion.div
               initial={{ opacity: 0, scale: 0.6 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              style={{ position: 'relative', width: 340, height: 340, flexShrink: 0 }}
               className="hero-orbit"
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', width: 260, height: 260, flexShrink: 0 }}
             >
-              <style>{`.hero-orbit { display: none; } @media(min-width: 900px){ .hero-orbit { display: flex !important; } }`}</style>
-              <div style={{ width: 100, height: 100, borderRadius: '50%', background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontSize: '1.5rem', color: '#fff', fontWeight: 600, zIndex: 2, boxShadow: '0 0 40px rgba(37,99,235,0.35)', position: 'relative' }}>
-                MH
-              </div>
-              {[130, 200].map((r, ri) => (
-                <div key={r} className="orbit-ring" style={{
-                  position: 'absolute', width: r * 2, height: r * 2,
-                  border: '1px solid var(--border)', borderRadius: '50%',
-                  animationDuration: `${10 + ri * 6}s`,
-                  animationDirection: ri % 2 === 0 ? 'normal' : 'reverse',
-                }}>
-                  <div style={{
-                    width: ri === 0 ? 10 : 8, height: ri === 0 ? 10 : 8,
-                    borderRadius: '50%',
-                    background: ri === 0 ? '#10b981' : '#f59e0b',
-                    position: 'absolute', top: -5, left: '50%',
-                    boxShadow: `0 0 10px ${ri === 0 ? '#10b981' : '#f59e0b'}`,
-                  }} />
-                </div>
-              ))}
+              <style>{`.hero-orbit { display: none; } @media(min-width: 900px){ .hero-orbit { display: block !important; } }`}</style>
+              <Hero3D />
             </motion.div>
           </div>
         </div>
