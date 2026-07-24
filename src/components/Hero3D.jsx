@@ -58,9 +58,9 @@ export default function Hero3D() {
     window.addEventListener('mousemove', onMouseMove)
 
     let raf
-    const clock = new THREE.Clock()
+    const startTime = performance.now()
     const animate = () => {
-      const t = clock.getElapsedTime()
+      const t = (performance.now() - startTime) / 1000
       mesh.rotation.y += (targetRotY - mesh.rotation.y) * 0.04 + 0.0025
       mesh.rotation.x += (targetRotX - mesh.rotation.x) * 0.04
       core.rotation.y -= 0.004
