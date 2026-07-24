@@ -1,31 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+
+const CHARS = '01{}<>/;=+-*#'
+const VIEW_W = 280
+const VIEW_H = 170
+const CELL = 13
+const COLS = Math.ceil(VIEW_W / CELL) + 1
+const ROWS = Math.ceil(VIEW_H / CELL) + 1
+
+function randChar() {
+  return CHARS[Math.floor(Math.random() * CHARS.length)]
+}
+
+function makeGrid() {
+  return Array.from({ length: ROWS }, () =>
+    Array.from({ length: COLS }, () => randChar())
+  )
+}
 
 export default function Preloader({ onDone }) {
   const [visible, setVisible] = useState(true)
   const [progress, setProgress] = useState(0)
-  const [phase, setPhase] = useState('draw')
+  const [grid, setGrid] = useState(makeGrid)
+  const startRef = useRef(null)
 
   useEffect(() => {
-    const start = performance.now()
-    const DRAW_MS = 1400
-    const FILL_MS = 500
-    const HOLD_MS = 350
-
+    const DURATION = 1900
+    const HOLD = 350
     let raf
     const tick = now => {
-      const elapsed = now - start
-      const pct = Math.min(100, Math.round((elapsed / (DRAW_MS + FILL_MS)) * 100))
+      if (startRef.current === null) startRef.current = now
+      const elapsed = now - startRef.current
+      const pct = Math.min(100, Math.round((elapsed / DURATION) * 100))
       setProgress(pct)
-
-      if (elapsed < DRAW_MS) {
-        setPhase('draw')
-        raf = requestAnimationFrame(tick)
-      } else if (elapsed < DRAW_MS + FILL_MS) {
-        setPhase('fill')
-        raf = requestAnimationFrame(tick)
-      } else if (elapsed < DRAW_MS + FILL_MS + HOLD_MS) {
-        setPhase('hold')
+      if (elapsed < DURATION + HOLD) {
         raf = requestAnimationFrame(tick)
       } else {
         setVisible(false)
@@ -36,7 +44,17 @@ export default function Preloader({ onDone }) {
     return () => cancelAnimationFrame(raf)
   }, [onDone])
 
-  const drawDuration = 1.4
+  useEffect(() => {
+    const iv = setInterval(() => {
+      setGrid(g => g.map(row =>
+        row.map(c => (Math.random() < 0.18 ? randChar() : c))
+      ))
+    }, 90)
+    return () => clearInterval(iv)
+  }, [])
+
+  const fillFrac = progress / 100
+  const fillTopY = VIEW_H - fillFrac * VIEW_H
 
   return (
     <AnimatePresence>
@@ -49,89 +67,80 @@ export default function Preloader({ onDone }) {
             position: 'fixed', inset: 0, zIndex: 10000,
             background: '#0a0a0f',
             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-            overflow: 'hidden',
           }}
         >
-          <div style={{
-            position: 'absolute', inset: 0, opacity: 0.35,
-            backgroundImage: 'linear-gradient(rgba(37,99,235,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.08) 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
-            maskImage: 'radial-gradient(circle at center, black 0%, transparent 70%)',
-            WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 70%)',
-          }} />
+          <svg width={VIEW_W} height={VIEW_H} viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} style={{ overflow: 'visible' }}>
+            <defs>
+              <clipPath id="mhLetters">
+                <text
+                  x={VIEW_W / 2} y={VIEW_H * 0.74}
+                  textAnchor="middle"
+                  fontFamily="'JetBrains Mono', monospace"
+                  fontWeight="800"
+                  fontSize={VIEW_H * 0.72}
+                  letterSpacing="-4"
+                >MH</text>
+              </clipPath>
+            </defs>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: phase === 'draw' ? 0.5 : 0.8, scale: 1 }}
-            transition={{ duration: 1.2 }}
-            style={{
-              position: 'absolute', width: 340, height: 340, borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%)',
-              filter: 'blur(10px)',
-            }}
-          />
+            <text
+              x={VIEW_W / 2} y={VIEW_H * 0.74}
+              textAnchor="middle"
+              fontFamily="'JetBrains Mono', monospace"
+              fontWeight="800"
+              fontSize={VIEW_H * 0.72}
+              letterSpacing="-4"
+              fill="none"
+              stroke="rgba(37,99,235,0.35)"
+              strokeWidth="1.5"
+            >MH</text>
 
-          <motion.div
-            initial={{ opacity: 0, x: -10 }} animate={{ opacity: 0.4, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            style={{ position: 'absolute', left: '50%', marginLeft: -150, fontFamily: "'JetBrains Mono', monospace", fontSize: '2rem', color: '#2563eb', fontWeight: 300 }}
-          >&lt;</motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 10 }} animate={{ opacity: 0.4, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            style={{ position: 'absolute', left: '50%', marginLeft: 120, fontFamily: "'JetBrains Mono', monospace", fontSize: '2rem', color: '#2563eb', fontWeight: 300 }}
-          >/&gt;</motion.div>
+            <g clipPath="url(#mhLetters)">
+              {grid.map((row, r) => (
+                row.map((ch, c) => (
+                  <text
+                    key={`${r}-${c}`}
+                    x={c * CELL}
+                    y={r * CELL + 10}
+                    fontFamily="'JetBrains Mono', monospace"
+                    fontSize="12"
+                    fill={(r * COLS + c) % 6 === 0 ? '#4ade80' : '#2563eb'}
+                    opacity={0.9}
+                  >{ch}</text>
+                ))
+              ))}
 
-          <svg width="180" height="180" viewBox="0 0 180 180" style={{ position: 'relative', zIndex: 1 }}>
-            <motion.rect
-              x="10" y="10" width="160" height="160" rx="32"
-              fill="none"
-              stroke="#2563eb"
-              strokeWidth="2.5"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: drawDuration * 0.5, ease: 'easeInOut' }}
-            />
-            <motion.path
-              d="M 48 122 L 48 58 L 68 100 L 90 58 L 90 122"
-              fill="none"
-              stroke="#f0eee8"
-              strokeWidth="7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: drawDuration * 0.55, ease: 'easeInOut', delay: drawDuration * 0.2 }}
-            />
-            <motion.path
-              d="M 100 58 L 100 122 M 100 90 L 132 90 M 132 58 L 132 122"
-              fill="none"
-              stroke="#4ade80"
-              strokeWidth="7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: drawDuration * 0.55, ease: 'easeInOut', delay: drawDuration * 0.42 }}
-            />
-            {(phase === 'fill' || phase === 'hold') && (
+              <rect x="0" y="0" width={VIEW_W} height={Math.max(0, fillTopY)} fill="#0a0a0f" />
+
               <motion.rect
-                x="10" y="10" width="160" height="160" rx="32"
-                fill="#2563eb"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 0.12, 0] }}
-                transition={{ duration: 0.5 }}
+                x="0" y={fillTopY - 1.5} width={VIEW_W} height="2.5"
+                fill="#4ade80"
+                animate={{ opacity: [0.35, 1, 0.35] }}
+                transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ filter: 'drop-shadow(0 0 5px #4ade80)' }}
               />
-            )}
+            </g>
+
+            <text
+              x={VIEW_W / 2} y={VIEW_H * 0.74}
+              textAnchor="middle"
+              fontFamily="'JetBrains Mono', monospace"
+              fontWeight="800"
+              fontSize={VIEW_H * 0.72}
+              letterSpacing="-4"
+              fill="none"
+              stroke="rgba(240,238,232,0.55)"
+              strokeWidth="1"
+            >MH</text>
           </svg>
 
           <motion.div
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            style={{ marginTop: '2rem', textAlign: 'center' }}
+            transition={{ delay: 0.3 }}
+            style={{ marginTop: '1.75rem', textAlign: 'center' }}
           >
-            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem', color: '#6b7280', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>
-              {phase === 'draw' ? 'RENDERING PORTFOLIO' : phase === 'fill' ? 'FINALIZING' : 'READY'}
+            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.7rem', color: '#6b7280', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>
+              {progress < 100 ? 'COMPILING PORTFOLIO' : 'READY'}
             </p>
             <div style={{ width: 160, height: 2, background: '#1e1e26', borderRadius: 2, overflow: 'hidden', margin: '0 auto' }}>
               <motion.div
