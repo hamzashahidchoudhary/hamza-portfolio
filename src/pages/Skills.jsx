@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper.jsx'
 import AnimatedBg from '../components/AnimatedBg.jsx'
+import TiltCard from '../components/TiltCard.jsx'
+import RevealText from '../components/RevealText.jsx'
 
 const groups = [
   {
@@ -64,7 +66,7 @@ function Bar({ name, level, color, i }) {
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true }}
           transition={{ duration: 0.85, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-          style={{ height: '100%', background: color, borderRadius: 2 }}
+          style={{ height: '100%', background: color, borderRadius: 2, boxShadow: `0 0 8px ${color}80` }}
         />
       </div>
     </div>
@@ -77,42 +79,47 @@ export default function Skills() {
       <AnimatedBg />
       <section className="section">
         <div className="container">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <div className="eyebrow" style={{ marginBottom: '0.75rem' }}>Expertise</div>
+          <RevealText><div className="eyebrow" style={{ marginBottom: '0.75rem' }}>Expertise</div></RevealText>
+          <RevealText delay={0.1}>
             <h1 className="display" style={{ marginBottom: '1rem' }}>
               Skills &<br />
               <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>Technologies.</span>
             </h1>
-            <p style={{ color: 'var(--muted)', fontWeight: 300, maxWidth: 500, lineHeight: 1.8, marginBottom: '4rem' }}>
-              My toolkit built through university, internship experience, and personal projects — covering the full web and mobile development stack.
-            </p>
-          </motion.div>
+          </RevealText>
+          <motion.p
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+            style={{ color: 'var(--muted)', fontWeight: 300, maxWidth: 500, lineHeight: 1.8, marginBottom: '4rem' }}
+          >
+            My toolkit built through university, internship experience, and personal projects — covering the full web and mobile development stack.
+          </motion.p>
 
-          {/* Skill bars */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '2.5rem', marginBottom: '5rem' }}>
             {groups.map((g, gi) => (
               <motion.div
                 key={g.label}
-                className="card"
-                style={{ padding: '2rem' }}
                 initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: gi * 0.1 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.75rem' }}>
-                  <div style={{ width: 9, height: 9, borderRadius: '50%', background: g.color, flexShrink: 0 }} />
-                  <h2 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.14em', color: 'var(--ink2)' }}>{g.label.toUpperCase()}</h2>
-                </div>
-                {g.items.map((item, i) => (
-                  <Bar key={item.name} name={item.name} level={item.level} color={g.color} i={i} />
-                ))}
+                <TiltCard className="card" style={{ padding: '2rem', height: '100%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.75rem' }}>
+                    <motion.div
+                      animate={{ boxShadow: [`0 0 0px ${g.color}`, `0 0 10px ${g.color}`, `0 0 0px ${g.color}`] }}
+                      transition={{ duration: 2.5, repeat: Infinity }}
+                      style={{ width: 9, height: 9, borderRadius: '50%', background: g.color, flexShrink: 0 }}
+                    />
+                    <h2 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.14em', color: 'var(--ink2)' }}>{g.label.toUpperCase()}</h2>
+                  </div>
+                  {g.items.map((item, i) => (
+                    <Bar key={item.name} name={item.name} level={item.level} color={g.color} i={i} />
+                  ))}
+                </TiltCard>
               </motion.div>
             ))}
           </div>
 
-          {/* Tech chips */}
           <div style={{ borderTop: '1px solid var(--border)', paddingTop: '3.5rem', marginBottom: '3.5rem' }}>
-            <div className="eyebrow" style={{ marginBottom: '0.75rem' }}>All Technologies</div>
-            <h2 className="display" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', marginBottom: '2rem' }}>Full Toolkit</h2>
+            <RevealText><div className="eyebrow" style={{ marginBottom: '0.75rem' }}>All Technologies</div></RevealText>
+            <RevealText delay={0.1}><h2 className="display" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', marginBottom: '2rem' }}>Full Toolkit</h2></RevealText>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
               {['HTML5', 'CSS3', 'JavaScript', 'Dart', 'PHP', 'C++', 'SQL', 'NoSQL',
                 'React.js', 'Redux Toolkit', 'Node.js', 'Express', 'Laravel', 'PostgreSQL', 'Prisma',
@@ -127,8 +134,8 @@ export default function Skills() {
                   initial={{ opacity: 0, scale: 0.92 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.03 }}
-                  whileHover={{ borderColor: 'var(--accent)', color: 'var(--accent)', backgroundColor: 'var(--accent-lt)', scale: 1.04 }}
+                  transition={{ delay: i * 0.02 }}
+                  whileHover={{ borderColor: 'var(--accent)', color: 'var(--accent)', backgroundColor: 'var(--accent-lt)', scale: 1.08, y: -2 }}
                   style={{ cursor: 'default', fontSize: '0.75rem', padding: '0.3rem 0.85rem' }}
                 >
                   {t}
@@ -137,10 +144,9 @@ export default function Skills() {
             </div>
           </div>
 
-          {/* Certifications */}
           <div style={{ borderTop: '1px solid var(--border)', paddingTop: '3.5rem' }}>
-            <div className="eyebrow" style={{ marginBottom: '0.75rem' }}>Certifications</div>
-            <h2 className="display" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', marginBottom: '2rem' }}>Credentials</h2>
+            <RevealText><div className="eyebrow" style={{ marginBottom: '0.75rem' }}>Certifications</div></RevealText>
+            <RevealText delay={0.1}><h2 className="display" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', marginBottom: '2rem' }}>Credentials</h2></RevealText>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
               {[
                 'HTML5 & CSS3 Foundations',
@@ -150,15 +156,15 @@ export default function Skills() {
               ].map((cert, i) => (
                 <motion.div
                   key={cert}
-                  className="card"
-                  style={{ padding: '1.5rem' }}
                   initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                 >
-                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--accent)', letterSpacing: '0.1em', marginBottom: '0.6rem' }}>
-                    UNIVERSITY OF MICHIGAN · COURSERA
-                  </p>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: 'var(--ink)', lineHeight: 1.35 }}>{cert}</h3>
+                  <TiltCard className="card" style={{ padding: '1.5rem' }}>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--accent)', letterSpacing: '0.1em', marginBottom: '0.6rem' }}>
+                      UNIVERSITY OF MICHIGAN · COURSERA
+                    </p>
+                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: 'var(--ink)', lineHeight: 1.35 }}>{cert}</h3>
+                  </TiltCard>
                 </motion.div>
               ))}
             </div>

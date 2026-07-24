@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper.jsx'
 import AnimatedBg from '../components/AnimatedBg.jsx'
+import TiltCard from '../components/TiltCard.jsx'
+import MagneticButton from '../components/MagneticButton.jsx'
+import RevealText from '../components/RevealText.jsx'
 
 const projects = [
   { id: 6, title: 'Veliora — AI Chatbot with Tool-Calling', category: 'Web', label: 'Full-Stack Project', status: 'in-progress',
@@ -61,26 +64,31 @@ export default function Projects() {
       `}</style>
       <section className="section">
         <div className="container">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <div className="eyebrow" style={{ marginBottom: '0.75rem' }}>My Work</div>
+          <RevealText><div className="eyebrow" style={{ marginBottom: '0.75rem' }}>My Work</div></RevealText>
+          <RevealText delay={0.1}>
             <h1 className="display" style={{ marginBottom: '1rem' }}>
               Projects I've<br /><span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>built & shipped.</span>
             </h1>
-            <p style={{ color: 'var(--muted)', fontWeight: 300, maxWidth: 500, lineHeight: 1.8, marginBottom: '3rem' }}>
-              From final year university projects to internship work — each project taught me something new about building real software.
-            </p>
-          </motion.div>
+          </RevealText>
+          <motion.p
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+            style={{ color: 'var(--muted)', fontWeight: 300, maxWidth: 500, lineHeight: 1.8, marginBottom: '3rem' }}
+          >
+            From final year university projects to internship work — each project taught me something new about building real software.
+          </motion.p>
 
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
             {cats.map(c => (
-              <button key={c} onClick={() => setActive(c)} style={{
-                fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.06em',
-                padding: '0.45rem 1.1rem', borderRadius: 7, border: '1px solid',
-                borderColor: active === c ? 'var(--accent)' : 'var(--border)',
-                background: active === c ? 'var(--accent-lt)' : 'var(--bg2)',
-                color: active === c ? 'var(--accent)' : 'var(--muted)',
-                cursor: 'pointer', transition: 'all 0.2s',
-              }}>{c}</button>
+              <motion.button key={c} onClick={() => setActive(c)}
+                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
+                style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.06em',
+                  padding: '0.45rem 1.1rem', borderRadius: 7, border: '1px solid',
+                  borderColor: active === c ? 'var(--accent)' : 'var(--border)',
+                  background: active === c ? 'var(--accent-lt)' : 'var(--bg2)',
+                  color: active === c ? 'var(--accent)' : 'var(--muted)',
+                  cursor: 'pointer', transition: 'background 0.2s, border-color 0.2s, color 0.2s',
+                }}>{c}</motion.button>
             ))}
           </div>
 
@@ -89,74 +97,68 @@ export default function Projects() {
               {filtered.map((p, i) => (
                 <motion.div key={p.id} layout
                   initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.97 }}
-                  transition={{ delay: i * 0.07 }} className="card" style={{ padding: '2rem' }}
+                  transition={{ delay: i * 0.07 }}
                 >
-                  <div className="project-card-inner">
-                    <div>
-                      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                        <span className={`tag ${p.category === 'Mobile' ? 'blue' : 'green'}`}>{p.category}</span>
-                        <span className="tag">{p.label}</span>
-                        {p.status === 'in-progress' && (
-                          <span style={{
-                            fontFamily: 'var(--font-mono)', fontSize: '0.62rem',
-                            padding: '0.2rem 0.65rem', borderRadius: 4,
-                            background: 'rgba(234,179,8,0.1)', border: '1px solid rgba(234,179,8,0.3)',
-                            color: '#92400e', display: 'flex', alignItems: 'center', gap: '0.35rem',
-                          }}>
-                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#f59e0b', display: 'inline-block' }} />
-                            In Progress
-                          </span>
-                        )}
+                  <TiltCard className="card" style={{ padding: '2rem' }}>
+                    <div className="project-card-inner">
+                      <div>
+                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+                          <span className={`tag ${p.category === 'Mobile' ? 'blue' : 'green'}`}>{p.category}</span>
+                          <span className="tag">{p.label}</span>
+                          {p.status === 'in-progress' && (
+                            <span style={{
+                              fontFamily: 'var(--font-mono)', fontSize: '0.62rem',
+                              padding: '0.2rem 0.65rem', borderRadius: 4,
+                              background: 'rgba(234,179,8,0.1)', border: '1px solid rgba(234,179,8,0.3)',
+                              color: '#92400e', display: 'flex', alignItems: 'center', gap: '0.35rem',
+                            }}>
+                              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#f59e0b', display: 'inline-block' }} />
+                              In Progress
+                            </span>
+                          )}
+                        </div>
+                        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.3rem, 3vw, 1.75rem)', color: 'var(--ink)', marginBottom: '0.75rem', lineHeight: 1.2 }}>{p.title}</h2>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1rem' }}>
+                          {p.stack.map(s => <span key={s} className="tag">{s}</span>)}
+                        </div>
+                        <p style={{ color: 'var(--muted)', fontSize: '0.9rem', fontWeight: 300, lineHeight: 1.75, marginBottom: '1.5rem' }}>{p.desc}</p>
+                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                          {p.link && (
+                            <MagneticButton href={p.link} target="_blank" rel="noreferrer" style={{
+                              fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
+                              color: 'var(--accent)', letterSpacing: '0.06em',
+                              border: '1px solid rgba(37,99,235,0.25)',
+                              padding: '0.45rem 1rem', borderRadius: 7,
+                              background: 'var(--accent-lt)', textDecoration: 'none',
+                            }}>
+                              Live Demo ↗
+                            </MagneticButton>
+                          )}
+                          {p.github && (
+                            <MagneticButton href={p.github} target="_blank" rel="noreferrer" style={{
+                              fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
+                              color: 'var(--muted)', letterSpacing: '0.06em',
+                              border: '1px solid var(--border)',
+                              padding: '0.45rem 1rem', borderRadius: 7,
+                              background: 'transparent', textDecoration: 'none',
+                            }}>
+                              GitHub ↗
+                            </MagneticButton>
+                          )}
+                        </div>
                       </div>
-                      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.3rem, 3vw, 1.75rem)', color: 'var(--ink)', marginBottom: '0.75rem', lineHeight: 1.2 }}>{p.title}</h2>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1rem' }}>
-                        {p.stack.map(s => <span key={s} className="tag">{s}</span>)}
-                      </div>
-                      <p style={{ color: 'var(--muted)', fontSize: '0.9rem', fontWeight: 300, lineHeight: 1.75, marginBottom: '1.5rem' }}>{p.desc}</p>
-                      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                        {p.link && (
-                          <a href={p.link} target="_blank" rel="noreferrer" style={{
-                            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                            fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
-                            color: 'var(--accent)', letterSpacing: '0.06em',
-                            border: '1px solid rgba(37,99,235,0.25)',
-                            padding: '0.45rem 1rem', borderRadius: 7,
-                            background: 'var(--accent-lt)', transition: 'all 0.2s',
-                          }}
-                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(37,99,235,0.15)'}
-                            onMouseLeave={e => e.currentTarget.style.background = 'var(--accent-lt)'}
-                          >
-                            Live Demo ↗
-                          </a>
-                        )}
-                        {p.github && (
-                          <a href={p.github} target="_blank" rel="noreferrer" style={{
-                            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                            fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
-                            color: 'var(--muted)', letterSpacing: '0.06em',
-                            border: '1px solid var(--border)',
-                            padding: '0.45rem 1rem', borderRadius: 7,
-                            background: 'transparent', transition: 'all 0.2s',
-                          }}
-                            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)' }}
-                            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--muted)' }}
-                          >
-                            GitHub ↗
-                          </a>
-                        )}
+                      <div style={{ background: 'var(--bg3)', borderRadius: 'var(--radius)', padding: '1.5rem', border: '1px solid var(--border)' }}>
+                        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--accent)', letterSpacing: '0.12em', marginBottom: '1rem' }}>KEY FEATURES</p>
+                        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
+                          {p.features.map((f, j) => (
+                            <li key={j} style={{ display: 'flex', gap: '0.6rem', fontSize: '0.88rem', color: 'var(--ink2)', fontWeight: 300, alignItems: 'flex-start' }}>
+                              <span style={{ color: 'var(--accent)', fontWeight: 600, flexShrink: 0 }}>✓</span>{f}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
-                    <div style={{ background: 'var(--bg3)', borderRadius: 'var(--radius)', padding: '1.5rem', border: '1px solid var(--border)' }}>
-                      <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--accent)', letterSpacing: '0.12em', marginBottom: '1rem' }}>KEY FEATURES</p>
-                      <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
-                        {p.features.map((f, j) => (
-                          <li key={j} style={{ display: 'flex', gap: '0.6rem', fontSize: '0.88rem', color: 'var(--ink2)', fontWeight: 300, alignItems: 'flex-start' }}>
-                            <span style={{ color: 'var(--accent)', fontWeight: 600, flexShrink: 0 }}>✓</span>{f}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                  </TiltCard>
                 </motion.div>
               ))}
             </AnimatePresence>
