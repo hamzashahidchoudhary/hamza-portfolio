@@ -1,95 +1,149 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const LINES = [
-  '$ whoami',
-  'muhammad_hamza',
-  '$ status --check',
-  'full_stack_developer: ready',
-  '$ launch portfolio.exe',
-]
-
 export default function Preloader({ onDone }) {
   const [visible, setVisible] = useState(true)
-  const [lineIdx, setLineIdx] = useState(0)
-  const [charIdx, setCharIdx] = useState(0)
   const [progress, setProgress] = useState(0)
+  const [phase, setPhase] = useState('draw')
 
   useEffect(() => {
-    if (lineIdx >= LINES.length) {
-      const t = setTimeout(() => {
+    const start = performance.now()
+    const DRAW_MS = 1400
+    const FILL_MS = 500
+    const HOLD_MS = 350
+
+    let raf
+    const tick = now => {
+      const elapsed = now - start
+      const pct = Math.min(100, Math.round((elapsed / (DRAW_MS + FILL_MS)) * 100))
+      setProgress(pct)
+
+      if (elapsed < DRAW_MS) {
+        setPhase('draw')
+        raf = requestAnimationFrame(tick)
+      } else if (elapsed < DRAW_MS + FILL_MS) {
+        setPhase('fill')
+        raf = requestAnimationFrame(tick)
+      } else if (elapsed < DRAW_MS + FILL_MS + HOLD_MS) {
+        setPhase('hold')
+        raf = requestAnimationFrame(tick)
+      } else {
         setVisible(false)
-        setTimeout(onDone, 700)
-      }, 400)
-      return () => clearTimeout(t)
+        setTimeout(onDone, 650)
+      }
     }
-    const line = LINES[lineIdx]
-    if (charIdx < line.length) {
-      const t = setTimeout(() => setCharIdx(c => c + 1), 22)
-      return () => clearTimeout(t)
-    } else {
-      const t = setTimeout(() => { setLineIdx(l => l + 1); setCharIdx(0) }, 220)
-      return () => clearTimeout(t)
-    }
-  }, [lineIdx, charIdx, onDone])
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [onDone])
 
-  useEffect(() => {
-    const total = LINES.reduce((a, l) => a + l.length, 0)
-    const done = LINES.slice(0, lineIdx).reduce((a, l) => a + l.length, 0) + charIdx
-    setProgress(Math.min(100, Math.round((done / total) * 100)))
-  }, [lineIdx, charIdx])
+  const drawDuration = 1.4
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, filter: 'blur(8px)' }}
+          exit={{ opacity: 0, filter: 'blur(6px)', scale: 1.02 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           style={{
             position: 'fixed', inset: 0, zIndex: 10000,
-            background: '#0a0a0d',
+            background: '#0a0a0f',
             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            overflow: 'hidden',
           }}
         >
+          <div style={{
+            position: 'absolute', inset: 0, opacity: 0.35,
+            backgroundImage: 'linear-gradient(rgba(37,99,235,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.08) 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
+            maskImage: 'radial-gradient(circle at center, black 0%, transparent 70%)',
+            WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 70%)',
+          }} />
+
           <motion.div
-            exit={{ scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: phase === 'draw' ? 0.5 : 0.8, scale: 1 }}
+            transition={{ duration: 1.2 }}
             style={{
-              width: 'min(440px, 86vw)', fontFamily: "'JetBrains Mono', monospace",
-              fontSize: '0.85rem', color: '#4ade80',
-              background: '#111114', border: '1px solid #26262e',
-              borderRadius: 10, padding: '1.5rem', minHeight: 160,
-              boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+              position: 'absolute', width: 340, height: 340, borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%)',
+              filter: 'blur(10px)',
             }}
-          >
-            <div style={{ display: 'flex', gap: 6, marginBottom: '1rem' }}>
-              <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#f87171' }} />
-              <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#fbbf24' }} />
-              <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#4ade80' }} />
-            </div>
-            {LINES.slice(0, lineIdx).map((l, i) => (
-              <div key={i} style={{ marginBottom: 6, opacity: l.startsWith('$') ? 0.6 : 1, color: l.startsWith('$') ? '#9ca3af' : '#4ade80' }}>{l}</div>
-            ))}
-            {lineIdx < LINES.length && (
-              <div style={{ marginBottom: 6, opacity: LINES[lineIdx].startsWith('$') ? 0.6 : 1, color: LINES[lineIdx].startsWith('$') ? '#9ca3af' : '#4ade80' }}>
-                {LINES[lineIdx].slice(0, charIdx)}
-                <span style={{ animation: 'blinkCursor 0.9s step-end infinite' }}>▊</span>
-              </div>
-            )}
-          </motion.div>
+          />
 
-          <div style={{ width: 'min(440px, 86vw)', height: 2, background: '#1e1e24', borderRadius: 2, marginTop: '1.5rem', overflow: 'hidden' }}>
-            <motion.div
-              animate={{ width: `${progress}%` }}
-              transition={{ ease: 'linear' }}
-              style={{ height: '100%', background: 'linear-gradient(90deg, #2563eb, #4ade80)' }}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }} animate={{ opacity: 0.4, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            style={{ position: 'absolute', left: '50%', marginLeft: -150, fontFamily: "'JetBrains Mono', monospace", fontSize: '2rem', color: '#2563eb', fontWeight: 300 }}
+          >&lt;</motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 10 }} animate={{ opacity: 0.4, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            style={{ position: 'absolute', left: '50%', marginLeft: 120, fontFamily: "'JetBrains Mono', monospace", fontSize: '2rem', color: '#2563eb', fontWeight: 300 }}
+          >/&gt;</motion.div>
+
+          <svg width="180" height="180" viewBox="0 0 180 180" style={{ position: 'relative', zIndex: 1 }}>
+            <motion.rect
+              x="10" y="10" width="160" height="160" rx="32"
+              fill="none"
+              stroke="#2563eb"
+              strokeWidth="2.5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: drawDuration * 0.5, ease: 'easeInOut' }}
             />
-          </div>
-          <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.65rem', color: '#4b4b57', marginTop: '0.75rem', letterSpacing: '0.1em' }}>
-            {progress}% LOADED
-          </p>
+            <motion.path
+              d="M 48 122 L 48 58 L 68 100 L 90 58 L 90 122"
+              fill="none"
+              stroke="#f0eee8"
+              strokeWidth="7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: drawDuration * 0.55, ease: 'easeInOut', delay: drawDuration * 0.2 }}
+            />
+            <motion.path
+              d="M 100 58 L 100 122 M 100 90 L 132 90 M 132 58 L 132 122"
+              fill="none"
+              stroke="#4ade80"
+              strokeWidth="7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: drawDuration * 0.55, ease: 'easeInOut', delay: drawDuration * 0.42 }}
+            />
+            {(phase === 'fill' || phase === 'hold') && (
+              <motion.rect
+                x="10" y="10" width="160" height="160" rx="32"
+                fill="#2563eb"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: [0, 0.12, 0] }}
+                transition={{ duration: 0.5 }}
+              />
+            )}
+          </svg>
 
-          <style>{`@keyframes blinkCursor { 0%,50%{opacity:1} 51%,100%{opacity:0} }`}</style>
+          <motion.div
+            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            style={{ marginTop: '2rem', textAlign: 'center' }}
+          >
+            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem', color: '#6b7280', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>
+              {phase === 'draw' ? 'RENDERING PORTFOLIO' : phase === 'fill' ? 'FINALIZING' : 'READY'}
+            </p>
+            <div style={{ width: 160, height: 2, background: '#1e1e26', borderRadius: 2, overflow: 'hidden', margin: '0 auto' }}>
+              <motion.div
+                animate={{ width: `${progress}%` }}
+                transition={{ ease: 'linear' }}
+                style={{ height: '100%', background: 'linear-gradient(90deg, #2563eb, #4ade80)' }}
+              />
+            </div>
+            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.65rem', color: '#4b4b57', marginTop: '0.6rem', letterSpacing: '0.1em' }}>
+              {progress}%
+            </p>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
