@@ -39,7 +39,7 @@ body {
 a { color: inherit; text-decoration: none; }
 
 @media (hover: hover) and (pointer: fine) {
-  body, a, button, [data-hover] { cursor: none; }
+  *, *::before, *::after { cursor: none !important; }
 }
 
 ::-webkit-scrollbar { width: 4px; }
