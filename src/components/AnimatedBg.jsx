@@ -8,7 +8,8 @@ export default function AnimatedBg() {
     const ctx = canvas.getContext('2d')
     let animId
     let W = window.innerWidth, H = window.innerHeight
-    let mouse = { x: W / 2, y: H / 2 }
+    const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches
+    let mouse = isTouchDevice ? { x: -9999, y: -9999 } : { x: W / 2, y: H / 2 }
 
     const resize = () => {
       W = window.innerWidth; H = window.innerHeight
@@ -16,7 +17,9 @@ export default function AnimatedBg() {
     }
     resize()
     window.addEventListener('resize', resize)
-    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY })
+    if (!isTouchDevice) {
+      window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY })
+    }
 
     const COUNT = Math.min(80, Math.floor(W * H / 15000))
     const particles = Array.from({ length: COUNT }, () => ({
@@ -108,6 +111,9 @@ export default function AnimatedBg() {
     return () => {
       cancelAnimationFrame(animId)
       window.removeEventListener('resize', resize)
+      if (!isTouchDevice) {
+        window.removeEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY })
+      }
     }
   }, [])
 
