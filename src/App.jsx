@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
-import CursorTrail from './components/CursorTrail.jsx'
+import GlitchCursor from './components/GlitchCursor.jsx'
 import Preloader from './components/Preloader.jsx'
 import CommandPalette from './components/CommandPalette.jsx'
 import SmoothScroll from './components/SmoothScroll.jsx'
@@ -43,7 +43,7 @@ export default function App() {
       {loading && <Preloader onDone={handlePreloaderDone} />}
       {!loading && (
         <SmoothScroll>
-          {!isMobile && <CursorTrail />}
+          {!isMobile && <GlitchCursor />}
           <Navbar onToggleTheme={toggleTheme} isDark={dark} />
           <CommandPalette toggleTheme={toggleTheme} />
           <AnimatePresence mode="wait">
