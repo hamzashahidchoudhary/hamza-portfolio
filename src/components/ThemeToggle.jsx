@@ -8,7 +8,7 @@ const KNOB = H - PAD * 2
 export default function ThemeToggle({ isDark, onToggle, style }) {
   return (
     <motion.button
-      onClick={onToggle}
+      onClick={e => { e.stopPropagation(); onToggle() }}
       whileTap={{ scale: 0.93 }}
       aria-label="Toggle dark mode"
       style={{
