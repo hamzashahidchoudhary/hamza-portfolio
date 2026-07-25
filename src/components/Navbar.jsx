@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import ThemeToggle from './ThemeToggle.jsx'
 
 const links = [
   { to: '/', label: 'Home' },
@@ -65,18 +66,7 @@ export default function Navbar({ onToggleTheme, isDark }) {
                 })}
               >{l.label}</NavLink>
             ))}
-            <button
-              onClick={onToggleTheme}
-              style={{
-                background: 'none', border: '1px solid var(--border)',
-                borderRadius: 8, padding: '0.45rem 0.7rem',
-                cursor: 'pointer', fontSize: '1rem',
-                color: 'var(--ink2)', transition: 'all 0.2s',
-              }}
-              title="Toggle dark mode"
-            >
-              {isDark ? '☀️' : '🌙'}
-            </button>
+            <ThemeToggle isDark={isDark} onToggle={onToggleTheme} style={{ marginLeft: '0.25rem' }} />
             <NavLink to="/contact" className="btn btn-primary"
               style={{ marginLeft: '0.5rem', padding: '0.5rem 1.2rem', fontSize: '0.85rem' }}
             >Hire Me</NavLink>
@@ -143,17 +133,20 @@ export default function Navbar({ onToggleTheme, isDark }) {
               </motion.div>
             ))}
             <div style={{ paddingTop: '0.5rem', borderTop: '1px solid var(--border)', marginTop: '0.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <button
+              <div
                 onClick={() => { onToggleTheme(); close() }}
                 style={{
-                  background: 'none', border: '1px solid var(--border)',
-                  borderRadius: 8, padding: '0.7rem',
-                  cursor: 'pointer', fontSize: '0.88rem', fontWeight: 500,
-                  color: 'var(--ink2)', width: '100%',
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  border: '1px solid var(--border)',
+                  borderRadius: 8, padding: '0.6rem 0.9rem',
+                  cursor: 'pointer', width: '100%',
                 }}
               >
-                {isDark ? '☀️ Light Mode' : '🌙 Dark Mode'}
-              </button>
+                <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.88rem', fontWeight: 500, color: 'var(--ink2)' }}>
+                  {isDark ? 'Dark Mode' : 'Light Mode'}
+                </span>
+                <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
+              </div>
               <NavLink to="/contact" onClick={close} className="btn btn-primary"
                 style={{ width: '100%', justifyContent: 'center', padding: '0.7rem' }}
               >Hire Me →</NavLink>
