@@ -7,6 +7,13 @@ import RevealText from '../components/RevealText.jsx'
 import MagneticButton from '../components/MagneticButton.jsx'
 
 const timeline = [
+  const timeline = [
+  { year: 'Aug 2026 – Present', role: 'Technical Trainee', place: 'Invozone (Pvt) Ltd, Lahore', type: 'work',
+    points: [
+      'Receiving hands-on training in Frontend and Backend Development',
+      'Building practical skills across the full web development stack',
+      'Learning industry best practices and modern development workflows',
+    ] },
   { year: 'Jan 2026 – Jul 2026', role: 'Junior Full Stack Developer', place: 'Hello Future Technologies (Pvt) Ltd, Lahore', type: 'work',
     points: [
       'Collaborated with the Senior Web Developer to build and maintain full-stack web applications',
