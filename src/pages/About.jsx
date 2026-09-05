@@ -126,7 +126,7 @@ export default function About() {
 
             <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.15 }}>
               <TiltCard className="about-avatar" style={{ background: 'linear-gradient(135deg, #e8f0fe 0%, #ede9fe 100%)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '3rem 1.5rem', marginBottom: '1.5rem' }}>
-                <img src="/photo.jpeg" alt="Muhammad Hamza" style={{ width: 110, height: 110, borderRadius: '50%', objectFit: 'cover', marginBottom: '0.75rem', border: '3px solid var(--accent)' }} />
+                <img src="/photo.png" alt="Muhammad Hamza" style={{ width: 110, height: 110, borderRadius: '50%', objectFit: 'cover', marginBottom: '0.75rem', border: '3px solid var(--accent)' }} />
                 <p style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--ink)' }}>Muhammad Hamza</p>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--muted)', marginTop: '0.2rem' }}>Full Stack Developer</p>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--muted)', marginTop: '0.1rem' }}>Rahim Yar Khan, Pakistan</p>
